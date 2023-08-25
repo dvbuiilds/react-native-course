@@ -250,28 +250,49 @@ export {};
 
 // loadPage(dbQuery);
 
-"use strict";
-const performUpload = (imgStatus: string): Promise<{imgStatus: string}> => {
-    return new Promise( resolve => {
-        console.log(`Status : ${imgStatus}`);
-        setTimeout(() => {
-            resolve({imgStatus});
-        }, 1000);
-    });
+// "use strict";
+// const performUpload = (imgStatus: string): Promise<{imgStatus: string}> => {
+//     return new Promise( resolve => {
+//         console.log(`Status : ${imgStatus}`);
+//         setTimeout(() => {
+//             resolve({imgStatus});
+//         }, 1000);
+//     });
+// };
+
+// let upload: any, compress: any, transfer: any;
+
+// performUpload('Uploading...')
+// .then( res => {
+//     upload = res;
+//     return performUpload('Compressing...');
+// })
+// .then( res => {
+//     compress = res;
+//     return performUpload('Transferring...');
+// })
+// .then( res => {
+//     transfer = res;
+//     return performUpload('Image upload successful.');
+// });
+
+// Decorators
+const processOne: ()=> any = ()=> {
+    console.log('Process One is called...');
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor): void => {
+        console.log('Process One returns a fn.');
+    };
 };
 
-let upload: any, compress: any, transfer: any;
+const processTwo: ()=> any = ()=> {
+    console.log('Process Two is called...');
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor): void => {
+        console.log('Process Two returns a fn.');
+    };
+};
 
-performUpload('Uploading...')
-.then( res => {
-    upload = res;
-    return performUpload('Compressing...');
-})
-.then( res => {
-    compress = res;
-    return performUpload('Transferring...');
-})
-.then( res => {
-    transfer = res;
-    return performUpload('Image upload successful.');
-});
+class Post{
+    @processOne()
+    @processTwo()
+    someFn: ()=> void;
+};

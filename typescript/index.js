@@ -1,3 +1,14 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 // // function body 1
 // const greetings: Function = (message: string)=> {
 //     console.log(message);
@@ -200,27 +211,49 @@
 //     console.log('Footer');
 // };
 // loadPage(dbQuery);
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const performUpload = (imgStatus) => {
-    return new Promise(resolve => {
-        console.log(`Status : ${imgStatus}`);
-        setTimeout(() => {
-            resolve({ imgStatus });
-        }, 1000);
-    });
+// "use strict";
+// const performUpload = (imgStatus: string): Promise<{imgStatus: string}> => {
+//     return new Promise( resolve => {
+//         console.log(`Status : ${imgStatus}`);
+//         setTimeout(() => {
+//             resolve({imgStatus});
+//         }, 1000);
+//     });
+// };
+// let upload: any, compress: any, transfer: any;
+// performUpload('Uploading...')
+// .then( res => {
+//     upload = res;
+//     return performUpload('Compressing...');
+// })
+// .then( res => {
+//     compress = res;
+//     return performUpload('Transferring...');
+// })
+// .then( res => {
+//     transfer = res;
+//     return performUpload('Image upload successful.');
+// });
+var processOne = function () {
+    console.log('Process One is called...');
+    return function (target, propertyKey, descriptor) {
+        console.log('Process One returns a fn.');
+    };
 };
-let upload, compress, transfer;
-performUpload('Uploading...')
-    .then(res => {
-    upload = res;
-    return performUpload('Compressing...');
-})
-    .then(res => {
-    compress = res;
-    return performUpload('Transferring...');
-})
-    .then(res => {
-    transfer = res;
-    return performUpload('Image upload successful.');
-});
+var processTwo = function () {
+    console.log('Process Two is called...');
+    return function (target, propertyKey, descriptor) {
+        console.log('Process Two returns a fn.');
+    };
+};
+var Post = /** @class */ (function () {
+    function Post() {
+    }
+    __decorate([
+        processOne(),
+        processTwo(),
+        __metadata("design:type", Function)
+    ], Post.prototype, "someFn", void 0);
+    return Post;
+}());
+;
