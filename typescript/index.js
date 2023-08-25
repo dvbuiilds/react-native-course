@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // // function body 1
 // const greetings: Function = (message: string)=> {
 //     console.log(message);
@@ -189,16 +187,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // console.log(post.title);
 // console.log(post.body);
 // post.printPost();
-// High order functions
-var dbQuery = function () {
-    setTimeout(function () {
-        console.log('Console log query results.');
-    }, 3000);
+// // High order functions
+// const dbQuery = (): void => {
+//     setTimeout(() => {
+//         console.log('Console log query results.');
+//     }, 3000);
+// };
+// const loadPage = (fn: ()=> void): void => {
+//     console.log('Header');
+//     fn();
+//     console.log('Sidebar');
+//     console.log('Footer');
+// };
+// loadPage(dbQuery);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const performUpload = (imgStatus) => {
+    return new Promise(resolve => {
+        console.log(`Status : ${imgStatus}`);
+        setTimeout(() => {
+            resolve({ imgStatus });
+        }, 1000);
+    });
 };
-var loadPage = function (fn) {
-    console.log('Header');
-    fn();
-    console.log('Sidebar');
-    console.log('Footer');
-};
-loadPage(dbQuery);
+let upload, compress, transfer;
+performUpload('Uploading...')
+    .then(res => {
+    upload = res;
+    return performUpload('Compressing...');
+})
+    .then(res => {
+    compress = res;
+    return performUpload('Transferring...');
+})
+    .then(res => {
+    transfer = res;
+    return performUpload('Image upload successful.');
+});

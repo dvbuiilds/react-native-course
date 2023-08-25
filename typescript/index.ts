@@ -234,18 +234,44 @@ export {};
 // console.log(post.body);
 // post.printPost();
 
-// High order functions
-const dbQuery = (): void => {
-    setTimeout(() => {
-        console.log('Console log query results.');
-    }, 3000);
+// // High order functions
+// const dbQuery = (): void => {
+//     setTimeout(() => {
+//         console.log('Console log query results.');
+//     }, 3000);
+// };
+
+// const loadPage = (fn: ()=> void): void => {
+//     console.log('Header');
+//     fn();
+//     console.log('Sidebar');
+//     console.log('Footer');
+// };
+
+// loadPage(dbQuery);
+
+"use strict";
+const performUpload = (imgStatus: string): Promise<{imgStatus: string}> => {
+    return new Promise( resolve => {
+        console.log(`Status : ${imgStatus}`);
+        setTimeout(() => {
+            resolve({imgStatus});
+        }, 1000);
+    });
 };
 
-const loadPage = (fn: ()=> void): void => {
-    console.log('Header');
-    fn();
-    console.log('Sidebar');
-    console.log('Footer');
-};
+let upload: any, compress: any, transfer: any;
 
-loadPage(dbQuery);
+performUpload('Uploading...')
+.then( res => {
+    upload = res;
+    return performUpload('Compressing...');
+})
+.then( res => {
+    compress = res;
+    return performUpload('Transferring...');
+})
+.then( res => {
+    transfer = res;
+    return performUpload('Image upload successful.');
+});
